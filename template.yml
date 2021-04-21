@@ -1,21 +1,21 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: 2010-09-09
 Transform: AWS::Serverless-2016-10-31
-Description: myATMapp
-  
-Globals:
-  Function:
-    Timeout: 50
-
 Resources:
-  atmProducerFn:
-    Type: AWS::Serverless::Function
+  HttpApi:
+    Type: AWS::Serverless::HttpApi
     Properties:
-      CodeUri: atmProducer/
-      Handler: handler.lambdaHandler
-      Runtime: nodejs12.x
-      Policies:
-        - Statement:
-          - Effect: Allow
-            Resource: '*'
-            Action:
-              - events:PutEvents      
+      DefinitionBody:
+        openapi: '3.0'
+        info:
+          title: !Sub ${AWS::StackName}-HttpApi
+          version: '1.0'
+        paths:
+          /:
+            post:
+              responses: {}
+      FailOnWarnings: true
+Parameters:
+  StackTagName:
+    Type: String
+    Description: Stack Name (injected by Stackery at deployment time)
+    Default: localtest

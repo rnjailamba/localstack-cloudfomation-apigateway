@@ -9,7 +9,7 @@ services:
       - "4566-4599:4566-4599"
       - 443:443
     environment:
-      - SERVICES=lambda,cognito,apigateway,cloudformation,sqs,sns,events,stepfunctions,s3,serverless,firehose,es
+      - SERVICES=lambda,cognito,apigateway,apigatewayv2,cloudformation,sqs,sns,events,stepfunctions,s3,serverless,firehose,es,ec2
       - LOCALSTACK_API_KEY=${LOCALSTACK_API_KEY}
       - DEBUG=1
       - LOCALSTACK_HOSTNAME=localhost
